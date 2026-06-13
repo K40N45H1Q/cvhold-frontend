@@ -18,7 +18,6 @@ const categories = [
   { name: 'IT и технологии', icon: faDesktop, vacancies: '200 вакансий' },
   { name: 'Медицина', icon: faBriefcaseMedical, vacancies: '200 вакансий' },
   { name: 'Гостиничный бизнес', icon: faHotel, vacancies: '200 вакансий' },
-  { name: 'Все категории', icon: faThLarge, vacancies: 'Смотреть все' }
 ]
 </script>
 
@@ -26,7 +25,7 @@ const categories = [
   <section class="popular">
     <div class="popular__header">
       <h2 class="popular__title">Популярные категории</h2>
-      <a href="#" class="popular__all">
+      <a class="popular__all">
         Все категории
         <FontAwesomeIcon :icon="faArrowRight" class="popular__arrow" />
       </a>
@@ -49,43 +48,47 @@ const categories = [
 </template>
 
 <style scoped>
+/* ============================
+   БАЗА (МОБИЛЬНЫЕ ПО УМОЛЧАНИЮ)
+   ============================ */
 .popular {
-  width: 1600px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 1600px;
   background: #FFFFFF;
-  margin-top: 40px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
-  padding: 35px 48px;
+  border-radius: 0.75rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
   box-sizing: border-box;
-  margin-bottom: 40px;
+  margin: 0 auto;
 }
 
 .popular__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 35px;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .popular__title {
-  font-family: 'Articulat CF', sans-serif;
   font-weight: 700;
-  font-size: 35px;
-  line-height: 59px;
+  font-size: clamp(1.4rem, 4vw, 2.1875rem); /* 22px - 35px */
+  line-height: 1.2;
   color: #1E2326;
   margin: 0;
 }
 
 .popular__all {
-  font-family: 'Articulat CF', sans-serif;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 150%;
+  font-size: clamp(0.9rem, 2vw, 1.25rem); /* 14.4px - 20px */
+  line-height: 1.5;
   color: rgba(30, 35, 38, 0.5);
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 8px;
+  transition: color 0.2s ease;
 }
 
 .popular__all:hover {
@@ -94,28 +97,40 @@ const categories = [
 
 .popular__arrow {
   color: #A5A7A8;
-  font-size: 14px;
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  transition: transform 0.2s ease;
 }
 
+.popular__all:hover .popular__arrow {
+  transform: translateX(4px);
+}
+
+/* ============================
+   СЕТКА (ВСЕГДА ЧЁТНОЕ КОЛИЧЕСТВО)
+   ============================ */
 .popular__grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 15px;
+  /* МОБИЛЬНЫЕ: 2 колонки (чётное) */
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.75rem, 2vw, 1rem);
 }
 
 .category-card {
-  width: 181px;
-  height: 219px;
+  width: 100%;
+  min-height: clamp(160px, 22vw, 219px);
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 20px;
+  justify-content: center;
+  padding: clamp(1rem, 2vw, 1.875rem) 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-align: center;
 }
 
 .category-card:hover {
@@ -123,19 +138,20 @@ const categories = [
   transform: translateY(-2px);
 }
 
+/* ============================
+   ИКОНКИ (СОХРАНЕНЫ БЕЗ ИЗМЕНЕНИЙ)
+   ============================ */
 .category-card__icon-wrapper {
-  width: 74px;
-  height: 74px;
+  width: clamp(3rem, 5vw, 4.625rem); /* 48px - 74px */
+  height: clamp(3rem, 5vw, 4.625rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: clamp(1rem, 2vw, 1.25rem); /* 16px - 20px */
 }
 
 .category-card__icon {
-  font-size: 48px;
-  width: 48px;
-  height: 48px;
+  font-size: clamp(1.5rem, 4vw, 3rem); /* 24px - 48px */
   color: #19785A;
   background: linear-gradient(136.66deg, #19785A 6.63%, rgba(25, 120, 90, 0.3) 134.09%);
   -webkit-background-clip: text;
@@ -143,25 +159,95 @@ const categories = [
   background-clip: text;
 }
 
+/* ============================
+   ТЕКСТ
+   ============================ */
 .category-card__name {
-  font-family: 'Articulat CF', sans-serif;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 150%;
+  font-size: clamp(0.9rem, 1.2vw, 1rem); /* 14.4px - 16px */
+  line-height: 1.3;
   text-align: center;
   color: #1E2326;
   margin: 0 0 8px 0;
-  min-height: 40px;
+  min-height: 2.6em; /* Гарантирует одинаковую высоту карточек при 2 строках текста */
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .category-card__vacancies {
-  font-family: 'Articulat CF', sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
+  font-size: clamp(0.8rem, 1vw, 1rem); /* 12.8px - 16px */
+  line-height: 1.5;
   color: rgba(30, 35, 38, 0.5);
   margin: 0;
+  text-align: center;
+}
+
+/* ============================
+   ПЛАНШЕТЫ (от 768px)
+   ============================ */
+@media (min-width: 768px) {
+  .popular__grid {
+    /* ПЛАНШЕТЫ: 4 колонки (чётное) */
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================
+   ДЕСКТОП (от 1024px)
+   ============================ */
+@media (min-width: 1024px) {
+  .popular__grid {
+    /* НОУТБУКИ: 4 колонки (чётное, оптимально для чтения) */
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================
+   БОЛЬШИЕ ЭКРАНЫ (от 1400px)
+   ============================ */
+@media (min-width: 1400px) {
+  .popular {
+    padding: 2.5rem 3rem;
+  }
+  
+  .popular__grid {
+    /* ШИРОКИЕ ЭКРАНЫ: 6 колонок (чётное, вместо исходных 7) */
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+  }
+}
+
+/* ============================
+   iPhone SE / ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 360px)
+   ============================ */
+@media (max-width: 360px) {
+  .popular {
+    margin: 1rem auto;
+    padding: 1rem 0.75rem;
+  }
+
+  .popular__title {
+    font-size: 1.3rem;
+  }
+
+  .popular__all {
+    font-size: 0.85rem;
+  }
+
+  .category-card {
+    min-height: 150px;
+    padding: 1rem 0.5rem;
+  }
+
+  .category-card__name {
+    font-size: 0.85rem;
+    min-height: 2.4em;
+  }
+
+  .category-card__vacancies {
+    font-size: 0.75rem;
+  }
 }
 </style>

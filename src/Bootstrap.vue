@@ -17,7 +17,4 @@ import Footer from './components/Footer.vue';
   <Category />
   <Resume />
   <How />
-  <About />
-  <Ready />
-  <Footer />
 </template>

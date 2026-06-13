@@ -76,25 +76,31 @@ const category = ref('')
 </template>
 
 <style scoped>
+/* ============================
+   БАЗА (МОБИЛЬНЫЕ ПО УМОЛЧАНИЮ)
+   ============================ */
 .search {
   width: 100%;
   display: flex;
   justify-content: center;
+  padding: 1rem 0.75rem;
+  box-sizing: border-box;
+  z-index: 500;
 }
 
 .search-box {
   width: 100%;
   max-width: 1600px;
   background: #FFFFFF;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-  padding: 48px 51px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 0.75rem;
   box-sizing: border-box;
 }
 
+/* Всегда 1 колонка по умолчанию */
 .search-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 273px;
+  grid-template-columns: 1fr;
   gap: 0;
   align-items: start;
 }
@@ -102,19 +108,20 @@ const category = ref('')
 .field {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding-right: 42px;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  /* Разделитель между полями по вертикали */
+  border-bottom: 1px solid rgba(30, 35, 38, 0.12);
 }
 
-.field--bordered {
-    padding: 10px;
-    border-right: 1px solid rgba(30, 35, 38, 0.2);
+.field:last-of-type {
+  border-bottom: none;
 }
 
 .field-label {
   font-weight: 700;
-  font-size: 20px;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.4;
   color: #1E2326;
 }
 
@@ -122,32 +129,33 @@ const category = ref('')
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 30px;
+  min-height: 1.5rem;
 }
 
 .field-input,
 .field-select {
   width: 100%;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 0.9rem;
   line-height: 1.5;
-  color: rgba(30, 35, 38, 0.5);
+  color: rgba(30, 35, 38, 0.6);
   border: none;
   outline: none;
   background: transparent;
   padding: 0;
+  padding-right: 2rem; /* Место под иконку */
   appearance: none;
   cursor: pointer;
-  padding-right: 40px;
+  font-family: inherit;
 }
 
 .field-input::placeholder {
-  color: rgba(30, 35, 38, 0.5);
+  color: rgba(30, 35, 38, 0.4);
 }
 
 .field-select option {
   color: #1E2326;
-  font-size: 20px;
+  font-size: 0.95rem;
 }
 
 .field-icon {
@@ -160,41 +168,148 @@ const category = ref('')
 }
 
 .field-icon--search {
-  font-size: 22px;
-  right: 2px;
+  font-size: 1rem;
 }
 
 .field-icon--location {
-  font-size: 20px;
+  font-size: 0.95rem;
 }
 
 .field-icon--arrow {
   pointer-events: none;
-  font-size: 14px;
-  right: 4px;
+  font-size: 0.7rem;
+  right: 0.25rem;
 }
 
+/* Кнопка на мобильных */
 .search-btn {
-  height: 70px;
+  width: 100%;
+  height: 3rem;
+  margin-top: 1rem;
   background: #19785A;
-  box-shadow: 0px 4px 10px #FFFFFF, 0px 0px 4px #19785A;
-  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(25, 120, 90, 0.2);
+  border-radius: 0.5rem;
   border: none;
   font-weight: 600;
-  font-size: 18px;
-  line-height: 30px;
+  font-size: 0.85rem;
+  line-height: 1.4;
   text-align: center;
   text-transform: uppercase;
   color: #FFFFFF;
   cursor: pointer;
   transition: all 0.2s ease;
-  justify-self: end;
-  align-self: end;
-  padding: 0 24px;
+  font-family: inherit;
+  letter-spacing: 0.02em;
 }
 
 .search-btn:hover {
   background: #146149;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+}
+
+.search-btn:active {
+  transform: translateY(0);
+}
+
+/* ============================
+   ПОЛНЫЙ ЭКРАН (ДЕСКТОП)
+   ============================ */
+@media (min-width: 1024px) {
+  .search {
+    padding: 2rem 1.5rem;
+  }
+
+  .search-box {
+    padding: 2rem 3rem;
+    border-radius: 0.625rem;
+  }
+
+  /* 3 колонки полей + 1 колонка кнопки */
+  .search-grid {
+    grid-template-columns: 1fr 1fr 1fr 273px;
+    gap: 0;
+    align-items: end;
+  }
+
+  .field {
+    padding: 0.625rem;
+    border-bottom: none;
+    border-right: 1px solid rgba(30, 35, 38, 0.2);
+    gap: 0.75rem;
+  }
+
+  .field:last-of-type {
+    border-right: none;
+  }
+
+  .field-label {
+    font-size: 1.25rem;
+  }
+
+  .field-input,
+  .field-select {
+    font-size: 1.0625rem;
+    color: rgba(30, 35, 38, 0.5);
+    padding-right: 2.5rem;
+  }
+
+  .field-select option {
+    font-size: 1.15rem;
+  }
+
+  .field-icon--search {
+    font-size: 1.375rem;
+    right: 0.125rem;
+  }
+
+  .field-icon--location {
+    font-size: 1.25rem;
+  }
+
+  .field-icon--arrow {
+    font-size: 0.875rem;
+    right: 0.25rem;
+  }
+
+  .search-btn {
+    width: auto;
+    height: 4.375rem;
+    margin-top: 0;
+    font-size: 1.125rem;
+    border-radius: 0.625rem;
+    padding: 0 1.5rem;
+    box-shadow: 0px 4px 10px #FFFFFF, 0px 0px 4px #19785A;
+  }
+
+  .search-btn:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ============================
+   iPhone SE / очень маленькие экраны
+   ============================ */
+@media (max-width: 360px) {
+  .search {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .search-box {
+    padding: 1.25rem 1rem;
+  }
+
+  .field-label {
+    font-size: 0.9rem;
+  }
+
+  .field-input,
+  .field-select {
+    font-size: 0.85rem;
+  }
+
+  .search-btn {
+    height: 2.875rem;
+    font-size: 0.8rem;
+  }
 }
 </style>

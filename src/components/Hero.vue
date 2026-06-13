@@ -3,52 +3,44 @@
     <div class="container">
       
       <div class="content-wrapper">
-        
         <h1 class="main-title">
           <span class="text-green">РАБОТА И СОТРУДНИКИ</span><br />
           <span class="text-dark">В ОДНОМ МЕСТЕ</span>
         </h1>
 
         <p class="subtitle">
-          Находите работу и специалистов по всей Европе.<br />
-          Быстро. Просто. Без посредников.
+          Находите работу и специалистов по всей Европе.
         </p>
 
         <div class="buttons-group">
           <button class="btn btn-primary" @click="$emit('find-job')">
             <span class="btn-text">Найти работу</span>
-            <svg class="icon-arrow" viewBox="0 0 27 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13.5 0L27 9L13.5 18V0Z" fill="#FFFFFF"/>
-            </svg>
+            <i class="fa-solid fa-arrow-right icon-arrow"></i>
           </button>
 
           <button class="btn btn-secondary" @click="$emit('post-vacancy')">
             <span class="btn-text">Разместить вакансию</span>
-            <svg class="icon-plus" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="15" y="7" width="3" height="19" fill="#19785A"/>
-              <rect x="7" y="15" width="19" height="3" fill="#19785A"/>
-            </svg>
           </button>
         </div>
 
         <div class="features-list">
           <div class="feature-item">
-            <div class="feat-icon feat-check">
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#fff"/></svg>
+            <div class="feat-icon">
+              <i class="fa-solid fa-bolt"></i>
             </div>
             <span>Быстро</span>
           </div>
           
           <div class="feature-item">
-            <div class="feat-icon feat-bag">
-              <svg viewBox="0 0 24 24"><path d="M10 2H14C15.1 2 16 2.9 16 4V6H20C21.1 6 22 6.9 22 8V20C22 21.1 21.1 22 20 22H4C2.9 22 2 21.1 2 20V8C2 6.9 2.9 6 4 6H8V4C8 2.9 8.9 2 10 2ZM14 4H10V6H14V4Z" fill="#fff"/></svg>
+            <div class="feat-icon">
+              <i class="fa-solid fa-check"></i>
             </div>
             <span>Просто</span>
           </div>
 
           <div class="feature-item">
-            <div class="feat-icon feat-money">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2" fill="none"/><path d="M12 6v12M8 10h8M8 14h8" stroke="#fff" stroke-width="2"/></svg>
+            <div class="feat-icon">
+              <i class="fa-solid fa-user-check"></i>
             </div>
             <span>Без посредников</span>
           </div>
@@ -59,31 +51,6 @@
         <div class="globe-bg">
           <img src="/earth.png" alt="Earth Network" class="globe-img" />
         </div>
-
-        <div class="stat-card card-top">
-          <div class="stat-icon-box">
-            <svg viewBox="0 0 24 24" fill="#19785A" width="24" height="24">
-              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 1.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-            </svg>
-          </div>
-          <div class="stat-info">
-            <div class="stat-number">50 000+</div>
-            <div class="stat-text">Зарегистрированных участников на платформе</div>
-          </div>
-        </div>
-
-        <div class="stat-card card-bottom">
-          <div class="stat-icon-box">
-            <svg viewBox="0 0 24 24" fill="#19785A" width="24" height="24">
-              <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
-            </svg>
-          </div>
-          <div class="stat-info">
-            <div class="stat-number">15 000+</div>
-            <div class="stat-text">Активных вакансий по всей Европе</div>
-          </div>
-        </div>
-
       </div>
 
     </div>
@@ -94,94 +61,91 @@
 defineEmits(['find-job', 'post-vacancy']);
 </script>
 
+<!-- Подключение Font Awesome -->
+<style>
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
+</style>
+
 <style scoped>
+/* ============================
+   БАЗА
+   ============================ */
 .hero-section {
   width: 100%;
-  background-color: transparent;
-  padding: 0px 0;
   overflow: hidden;
-  position: relative;
 }
 
 .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 3rem);
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 560px;
-  gap: 40px;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+  max-height: max-content;
 }
 
-/* === ЛЕВАЯ ЧАСТЬ (КОНТЕНТ) === */
+/* ============================
+   ЛЕВАЯ ЧАСТЬ
+   ============================ */
 .content-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  max-width: 680px;
-  z-index: 2;
+  display: grid;
+  gap: clamp(1.25rem, 2vw, 1.5rem);
+  max-width: 640px;
+
 }
 
-/* ЗАГОЛОВОК */
 .main-title {
   font-weight: 700;
-  font-size: 56px;
   line-height: 1.15;
   text-transform: uppercase;
   margin: 0;
-  width: 1600px;
   letter-spacing: -0.01em;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
 }
 
-.text-green {
-  color: #19785A;
-}
+.text-green { color: #19785A; }
+.text-dark  { color: #1E2326; }
 
-.text-dark {
-  color: #1E2326;
-}
-
-/* ПОДЗАГОЛОВОК */
 .subtitle {
   font-weight: 400;
-  font-size: 20px;
   line-height: 1.5;
   color: #4A5054;
   margin: 0;
-  max-width: 1600px;
+  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
 }
 
-/* КНОПКИ */
+/* ============================
+   КНОПКИ
+   ============================ */
 .buttons-group {
-  display: flex;
-  gap: 16px;
-  margin-top: 8px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+  width: 100%;
 }
 
 .btn {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-radius: 10px;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 0.625rem;
   cursor: pointer;
-  padding: 0 24px;
-  box-sizing: border-box;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  height: 64px;
+  padding: 0 clamp(1rem, 2vw, 1.5rem);
+  height: clamp(3.5rem, 5vw, 4rem);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  font-family: inherit;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-0.125rem);
 }
 
-/* Кнопка "Найти работу" */
 .btn-primary {
-  width: 250px;
   background: #19785A;
-  box-shadow: 0px 4px 14px rgba(25, 120, 90, 0.25);
+  box-shadow: 0 0.25rem 0.875rem rgba(25, 120, 90, 0.25);
   border: none;
 }
 
@@ -191,20 +155,18 @@ defineEmits(['find-job', 'post-vacancy']);
 
 .btn-primary .btn-text {
   font-weight: 600;
-  font-size: 15px;
   text-transform: uppercase;
   color: #FFFFFF;
   letter-spacing: 0.03em;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
 }
 
 .icon-arrow {
-  width: 18px;
-  height: 14px;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  color: #FFFFFF;
 }
 
-/* Кнопка "Разместить вакансию" */
 .btn-secondary {
-  width: max-content;
   background: transparent;
   border: 1px solid rgba(30, 35, 38, 0.2);
 }
@@ -216,34 +178,36 @@ defineEmits(['find-job', 'post-vacancy']);
 
 .btn-secondary .btn-text {
   font-weight: 600;
-  font-size: 16px;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
   text-transform: uppercase;
   color: #1E2326;
   letter-spacing: 0.03em;
 }
 
 .icon-plus {
-  width: 24px;
-  height: 24px;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: #19785A;
 }
 
-/* НИЖНИЕ ФИЧИ (ИКОНКИ) */
+/* ============================
+   ФИЧИ (ИСПРАВЛЕНО)
+   ============================ */
 .features-list {
   display: flex;
-  gap: 32px;
-  margin-top: 16px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* всегда одна строка */
+  gap: clamp(0.5rem, 1.5vw, 2rem);
+  width: 100%;
 }
 
 .feature-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.4rem;
 }
 
 .feat-icon {
-  width: 22px;
-  height: 22px;
+  width: clamp(1.7rem, 2vw, 1.5rem);
+  height: clamp(1.7rem, 2vw, 1.5rem);
   border-radius: 50%;
   background: #19785A;
   display: flex;
@@ -252,110 +216,77 @@ defineEmits(['find-job', 'post-vacancy']);
   flex-shrink: 0;
 }
 
-.feat-icon svg {
-  width: 12px;
-  height: 12px;
+.feat-icon i {
+  font-size: clamp(0.55rem, 1vw, 0.7rem);
+  color: #FFFFFF;
 }
 
 .feature-item span {
   font-weight: 500;
-  font-size: 15px;
+  font-size: clamp(0.7rem, 1vw, 0.95rem);
   color: #1E2326;
+  white-space: nowrap;
 }
 
-/* === ПРАВАЯ ЧАСТЬ (ГЛОБУС И ВИЗУАЛ) === */
+/* ============================
+   ПРАВАЯ ЧАСТЬ
+   ============================ */
 .visual-wrapper {
   position: relative;
-  width: 520px;
-  height: 520px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: clamp(320px, 50vw, 650px);
+  margin: 0 auto;
 }
 
 .globe-bg {
   position: absolute;
-  width: 1024px;
-  height: 1024px;
-  background: radial-gradient(circle at center, rgba(25, 120, 90, 0.15) 0%, transparent 70%);
-  display: flex;
-  align-items: center;
-  top: -70px;
-  right: -100px;
-  justify-content: center;
-  z-index: 1;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.globe-bg::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(25, 120, 90, 0.12) 0%, transparent 70%);
 }
 
 .globe-img {
-  width: 1024px;
-  height: 1024px;
-  object-fit: contain;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-/* Карточки со статистикой */
-.stat-card {
+  height: clamp(250px, 45vw, 800px);
   position: absolute;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(25, 120, 90, 0.15);
-  padding: 16px 20px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.04), 0px 4px 10px rgba(25, 120, 90, 0.03);
-  max-width: 280px;
-  z-index: 3;
-  transition: transform 0.3s ease;
+  right: 0;
+  top: 0;
+  z-index: 555;
 }
 
-.stat-card:hover {
-  transform: translateY(-4px);
+/* ============================
+   остальной код без изменений
+   ============================ */
+
+/* планшеты */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    text-align: left;
+  }
+
+  .visual-wrapper {
+    order: -1;
+    margin-bottom: 1rem;
+    display: none;
+  }
 }
 
-.card-top {
-  top: 40px;
-  right: -10px;
-}
-
-.card-bottom {
-  bottom: 80px;
-  left: -20px;
-}
-
-.stat-icon-box {
-  width: 44px;
-  height: 44px;
-  background: rgba(25, 120, 90, 0.08);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.stat-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.stat-number {
-  font-size: 22px;
-  font-weight: 700;
-  color: #19785A;
-  line-height: 1.2;
-}
-
-.stat-text {
-  font-size: 12px;
-  font-weight: 500;
-  color: #4A5054;
-  line-height: 1.4;
+/* мобильные */
+@media (max-width: 768px) {
+  .buttons-group {
+    grid-template-columns: 1fr;
+  }
 }
 
 </style>

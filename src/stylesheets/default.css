@@ -10,3 +10,8 @@
 body, html {
     height: 100%;
 }
+
+#root {
+    overflow: hidden;
+    min-width: 375;
+}

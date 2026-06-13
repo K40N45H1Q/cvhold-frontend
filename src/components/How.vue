@@ -33,7 +33,7 @@
                         <line x1="24" y1="24" x2="34" y2="34" stroke="url(#g2)" stroke-width="3" stroke-linecap="round"/>
                     </svg>
                 </div>
-                <div class="step-title">Найдите/разместите вакансию</div>
+                <div class="step-title">Найдите или разместите вакансию</div>
                 <div class="step-desc">Используйте удобный поиск или публикуйте предложения.</div>
             </div>
 
@@ -77,68 +77,95 @@
 </template>
 
 <style scoped>
+/* ============================
+   БАЗОВЫЕ НАСТРОЙКИ
+   ============================ */
 .how-it-works {
-    width: 1600px;
-    margin: 80px auto 60px;
+    width: 100%;
+    max-width: 1600px;
+    margin: clamp(32px, 4vw, 40px) auto clamp(40px, 6vw, 60px);
+    padding: 0 16px;
+    box-sizing: border-box;
     font-family: 'Articulat CF', sans-serif;
 }
 
 .section-title {
-    font-family: 'Articulat CF', sans-serif;
     font-weight: 400;
-    font-size: 35px;
-    line-height: 123%;
+    /* Плавное масштабирование заголовка от 22px на маленьких экранах до 35px */
+    font-size: clamp(22px, 2.5vw + 12px, 35px);
+    line-height: 1.2;
     text-transform: uppercase;
     color: #1E2326;
-    margin: 0 0 60px 0;
+    margin-bottom: clamp(24px, 4vw, 60px);
     text-align: center;
-    white-space: nowrap;
 }
 
+/* ============================
+   СЕТКА ШАГОВ (Строго 2 или 4 в ряд)
+   ============================ */
 .steps-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 1600px;
+    display: grid;
+    /* Базовое состояние для мобильных: строго 2 в ряд */
+    grid-template-columns: repeat(2, 1fr);
+    /* Адаптивные отступы между карточками */
+    gap: clamp(24px, 3vw, 40px) clamp(12px, 2vw, 24px);
+    width: 100%;
 }
 
+/* Переключение на 4 в ряд для десктопов и больших планшетов */
+@media (min-width: 992px) {
+    .steps-wrapper {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ============================
+   КАРТОЧКА ШАГА
+   ============================ */
 .step {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 280px;
+    width: 100%;
 }
 
 .step-icon {
-    width: 75px;
-    height: 75px;
+    /* Резиновый размер кругов с иконками */
+    width: clamp(56px, 6vw + 20px, 75px);
+    height: clamp(56px, 6vw + 20px, 75px);
     background: #FFFFFF;
     box-shadow: 0px 0px 10px #FFFFFF, 0px 0px 10px #19785A;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: clamp(12px, 2vw, 20px);
+    flex-shrink: 0;
+}
+
+.step-icon svg {
+    width: 55%;
+    height: 55%;
 }
 
 .step-title {
-    font-family: 'Articulat CF', sans-serif;
     font-weight: 700;
-    font-size: 18px;
-    line-height: 150%;
+    /* Шрифт заголовка плавно растет от 14px до 18px */
+    font-size: clamp(15px, 1vw, 20px);
+    line-height: 1.3;
     color: #1E2326;
-    margin-bottom: 6px;
-    height: 27px;
+    margin-bottom: clamp(6px, 1vw, 10px);
 }
 
 .step-desc {
-    font-family: 'Articulat CF', sans-serif;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
+    /* Шрифт описания плавно растет от 12px до 16px */
+    font-size: clamp(12px, 0.4vw + 11px, 16px);
+    line-height: 1.45;
     color: #1E2326;
-    height: 48px;
-    width: 250px;
+    max-width: 280px;
+    margin: 0 auto;
+    display: none;
 }
 </style>
