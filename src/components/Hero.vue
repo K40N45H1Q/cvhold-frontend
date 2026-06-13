@@ -82,7 +82,7 @@ defineEmits(['find-job', 'post-vacancy']);
   gap: clamp(2rem, 4vw, 3rem);
   max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+  padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem);
   max-height: max-content;
 }
 
@@ -102,7 +102,7 @@ defineEmits(['find-job', 'post-vacancy']);
   text-transform: uppercase;
   margin: 0;
   letter-spacing: -0.01em;
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-size: clamp(1.3rem, 3vw, 2.5rem);
 }
 
 .text-green { color: #19785A; }
@@ -124,33 +124,7 @@ defineEmits(['find-job', 'post-vacancy']);
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: clamp(0.75rem, 1.5vw, 1rem);
   width: 100%;
-}
-
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  border-radius: 0.625rem;
-  cursor: pointer;
-  padding: 0 clamp(1rem, 2vw, 1.5rem);
-  height: clamp(3.5rem, 5vw, 4rem);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-  font-family: inherit;
-}
-
-.btn:hover {
-  transform: translateY(-0.125rem);
-}
-
-.btn-primary {
-  background: #19785A;
-  box-shadow: 0 0.25rem 0.875rem rgba(25, 120, 90, 0.25);
-  border: none;
-}
-
-.btn-primary:hover {
-  background: #146149;
+  white-space: nowrap;
 }
 
 .btn-primary .btn-text {
@@ -166,22 +140,11 @@ defineEmits(['find-job', 'post-vacancy']);
   color: #FFFFFF;
 }
 
-.btn-secondary {
-  background: transparent;
-  border: 1px solid rgba(30, 35, 38, 0.2);
-}
-
-.btn-secondary:hover {
-  background: rgba(30, 35, 38, 0.02);
-  border-color: rgba(30, 35, 38, 0.4);
-}
-
-.btn-secondary .btn-text {
+.btn-text {
   font-weight: 600;
   font-size: clamp(0.85rem, 1.2vw, 1rem);
   text-transform: uppercase;
   color: #1E2326;
-  letter-spacing: 0.03em;
 }
 
 .icon-plus {
@@ -273,6 +236,10 @@ defineEmits(['find-job', 'post-vacancy']);
     grid-template-columns: 1fr;
     min-height: auto;
     text-align: left;
+  }
+
+  .buttons-group {
+    white-space: warp;
   }
 
   .visual-wrapper {

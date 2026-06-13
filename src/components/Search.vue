@@ -13,7 +13,7 @@ const category = ref('')
     <div class="search-box">
       <div class="search-grid">
         <!-- Я ищу -->
-        <div class="field field--bordered">
+        <div class="field">
           <label class="field-label">Я ищу</label>
           <div class="field-input-row">
             <input 
@@ -30,7 +30,7 @@ const category = ref('')
         </div>
 
         <!-- Где -->
-        <div class="field field--bordered">
+        <div class="field">
           <label class="field-label">Где</label>
           <div class="field-input-row">
             <input 
@@ -47,7 +47,7 @@ const category = ref('')
         </div>
 
         <!-- Категория -->
-        <div class="field field--bordered">
+        <div class="field">
           <label class="field-label">Категория</label>
           <div class="field-input-row">
             <select v-model="category" class="field-select">
@@ -67,7 +67,7 @@ const category = ref('')
         </div>
 
         <!-- Кнопка -->
-        <button class="search-btn">
+        <button class="btn btn-primary">
           НАЙТИ ВАКАНСИИ
         </button>
       </div>
@@ -83,7 +83,6 @@ const category = ref('')
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 1rem 0.75rem;
   box-sizing: border-box;
   z-index: 500;
 }
@@ -92,7 +91,8 @@ const category = ref('')
   width: 100%;
   max-width: 1600px;
   background: #FFFFFF;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--b_shadow);
+  padding: 15px;
   border-radius: 0.75rem;
   box-sizing: border-box;
 }
@@ -102,7 +102,6 @@ const category = ref('')
   display: grid;
   grid-template-columns: 1fr;
   gap: 0;
-  align-items: start;
 }
 
 .field {
@@ -216,7 +215,7 @@ const category = ref('')
    ============================ */
 @media (min-width: 1024px) {
   .search {
-    padding: 2rem 1.5rem;
+    padding: var(--indent);
   }
 
   .search-box {
@@ -228,7 +227,7 @@ const category = ref('')
   .search-grid {
     grid-template-columns: 1fr 1fr 1fr 273px;
     gap: 0;
-    align-items: end;
+    align-items: center;
   }
 
   .field {

@@ -1,10 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap');
 
+:root {
+    --indent: 15px;
+    --b_shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+    --scrollbar-bg: transparent;
+    --scrollbar-thumb: #19785A;
+    --scrollbar-thumb-hover: #19785A;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Science Gothic", sans-serif;
+}
+
+/* ===== SCROLLBAR (Chrome / Edge / Safari) ===== */
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 10px;
+    border: 2px solid var(--scrollbar-bg);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+}
+
+/* ===== Firefox ===== */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
 }
 
 body, html {
@@ -13,5 +47,44 @@ body, html {
 
 #root {
     overflow: hidden;
-    min-width: 375;
+    min-width: 375px;
+}
+
+/* ===== BUTTONS ===== */
+
+.btn-primary {
+    color: #fff;
+    font-weight: 500;
+    background: #19785A;
+    box-shadow: 0 0.25rem 0.875rem rgba(25, 120, 90, 0.25);
+    border: none;
+    max-height: 60px;
+    
+}
+
+.btn-secondary {
+    padding: 0 clamp(1rem, 2vw, 1.5rem);
+    background-color: transparent;
+    border: 2px solid #19785A !important;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 0.625rem;
+    cursor: pointer;
+    max-height: 60px;
+    padding: 0 clamp(1rem, 2vw, 1.5rem);
+    height: clamp(3.5rem, 5vw, 4rem);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-0.125rem);
+}
+
+.btn-primary:hover {
+    background: #146149;
 }

@@ -152,7 +152,7 @@
 .step-title {
     font-weight: 700;
     /* Шрифт заголовка плавно растет от 14px до 18px */
-    font-size: clamp(15px, 1vw, 20px);
+    font-size: clamp(10px, 1vw, 20px);
     line-height: 1.3;
     color: #1E2326;
     margin-bottom: clamp(6px, 1vw, 10px);

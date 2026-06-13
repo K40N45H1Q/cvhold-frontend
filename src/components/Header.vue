@@ -42,8 +42,8 @@ function toggleMenu() {
       </nav>
 
       <div class="desktop-actions">
-        <button class="btn btn-signin">Войти</button>
-        <button class="btn btn-signup">Регистрация</button>
+        <button class="btn btn-secondary">Войти</button>
+        <button class="btn btn-primary">Регистрация</button>
       </div>
 
       <button class="burger" :class="{ active: menuOpen }" @click="toggleMenu">

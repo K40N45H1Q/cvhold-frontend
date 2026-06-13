@@ -55,19 +55,19 @@ const categories = [
   width: 100%;
   max-width: 1600px;
   background: #FFFFFF;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--b_shadow);
   border-radius: 0.75rem;
-  padding: clamp(1.25rem, 3vw, 2.5rem);
   box-sizing: border-box;
   margin: 0 auto;
+  padding: var(--indent);
 }
 
 .popular__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
   margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
-  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -75,8 +75,12 @@ const categories = [
   font-weight: 700;
   font-size: clamp(1.4rem, 4vw, 2.1875rem); /* 22px - 35px */
   line-height: 1.2;
+  width: max-content;
+  white-space: nowrap;
   color: #1E2326;
   margin: 0;
+  text-align: left;
+  width: 100%;
 }
 
 .popular__all {
@@ -86,7 +90,9 @@ const categories = [
   color: rgba(30, 35, 38, 0.5);
   text-decoration: none;
   display: flex;
+  width: 100%;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
   transition: color 0.2s ease;
 }
@@ -117,7 +123,6 @@ const categories = [
 
 .category-card {
   width: 100%;
-  min-height: clamp(160px, 22vw, 219px);
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 0.75rem;
@@ -195,8 +200,8 @@ const categories = [
 }
 
 /* ============================
-   ДЕСКТОП (от 1024px)
-   ============================ */
+ДЕСКТОП (от 1024px)
+============================ */
 @media (min-width: 1024px) {
   .popular__grid {
     /* НОУТБУКИ: 4 колонки (чётное, оптимально для чтения) */
@@ -205,30 +210,23 @@ const categories = [
 }
 
 /* ============================
-   БОЛЬШИЕ ЭКРАНЫ (от 1400px)
-   ============================ */
+БОЛЬШИЕ ЭКРАНЫ (от 1400px)
+============================ */
 @media (min-width: 1400px) {
-  .popular {
-    padding: 2.5rem 3rem;
-  }
   
   .popular__grid {
     /* ШИРОКИЕ ЭКРАНЫ: 6 колонок (чётное, вместо исходных 7) */
     grid-template-columns: repeat(6, 1fr);
-    gap: 15px;
   }
 }
 
 /* ============================
    iPhone SE / ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 360px)
    ============================ */
-@media (max-width: 360px) {
-  .popular {
-    margin: 1rem auto;
-    padding: 1rem 0.75rem;
-  }
+@media (max-width: 375px) {
 
   .popular__title {
+    text-align: center;
     font-size: 1.3rem;
   }
 
@@ -238,7 +236,6 @@ const categories = [
 
   .category-card {
     min-height: 150px;
-    padding: 1rem 0.5rem;
   }
 
   .category-card__name {
