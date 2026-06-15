@@ -12,10 +12,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Science Gothic", sans-serif;
+    font-family: "Science Gothic", sans-serif !important;
 }
 
-/* ===== SCROLLBAR (Chrome / Edge / Safari) ===== */
 *::-webkit-scrollbar {
     width: 10px;
     height: 10px;

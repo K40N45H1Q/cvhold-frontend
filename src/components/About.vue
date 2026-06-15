@@ -7,9 +7,6 @@
     >
       <span class="stat-number">{{ stat.number }}</span>
       <span class="stat-label">{{ stat.label }}</span>
-      
-      <!-- Вертикальный разделитель (не показываем для последнего элемента) -->
-      <div v-if="index !== stats.length - 1" class="divider"></div>
     </div>
   </div>
 </template>
@@ -28,10 +25,9 @@ const stats = ref([
 <style scoped>
 /* Основной контейнер */
 .stats-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #19785A; /* Темно-зеленый цвет как на фото */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #19785A;
   border-radius: 24px;
   padding: 48px 60px;
   width: 100%;
@@ -41,26 +37,21 @@ const stats = ref([
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Элемент статистики */
 .stat-item {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 10px;
-  flex: 1;
+  padding: 20px 30px;
 }
 
-/* Число */
 .stat-number {
   font-size: 42px;
   font-weight: 500;
   color: #ffffff;
-  line-height: 1;
+  line-height: 1.1;
   letter-spacing: -0.5px;
 }
 
-/* Подпись */
 .stat-label {
   font-size: 16px;
   font-weight: 400;
@@ -68,14 +59,80 @@ const stats = ref([
   line-height: 1.4;
 }
 
-/* Разделительная линия */
-.divider {
-  position: absolute;
-  right: 0;
-  top: 10%;
-  height: 80%;
-  width: 1px;
-  background-color: rgba(255, 255, 255, 0.2);
+/* ДЕСКТОП: правая граница у всех кроме 4, 8, 12... */
+.stat-item:not(:nth-child(4n)) {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* ПЛАНШЕТЫ И МОБИЛЬНЫЕ (до 1024px) — всегда 2 колонки */
+@media (max-width: 1024px) {
+  .stats-banner {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 40px 32px;
+  }
+
+  .stat-number {
+    font-size: 36px;
+  }
+
+  .stat-label {
+    font-size: 15px;
+  }
+
+  /* СБРАСЫВАЕМ все границы */
+  .stat-item {
+    border-right: none !important;
+    border-bottom: none !important;
+  }
+
+  /* Правая граница только у нечетных (1, 3) */
+  .stat-item:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Нижняя граница у первых двух (1, 2) */
+  .stat-item:nth-child(-n+2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+}
+
+/* Маленькие мобилки (до 480px) */
+@media (max-width: 480px) {
+  .stats-banner {
+    padding: 20px 12px;
+  }
+
+  .stat-item {
+    padding: 10px 12px;
+  }
+
+  .stat-number {
+    font-size: 24px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+}
+
+/* Очень маленькие мобилки (до 360px) */
+@media (max-width: 360px) {
+  .stats-banner {
+    padding: 16px 8px;
+    border-radius: 16px;
+  }
+
+  .stat-item {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .stat-number {
+    font-size: 20px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+}
 </style>

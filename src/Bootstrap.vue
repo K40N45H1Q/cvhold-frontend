@@ -8,13 +8,19 @@ import How from './components/How.vue';
 import About from './components/About.vue';
 import Ready from './components/Ready.vue';
 import Footer from './components/Footer.vue';
+import Loader from './components/Loader.vue';
+
 </script>
 
 <template>
-  <Header />
-  <Hero />
-  <Search />
-  <Category />
-  <Resume />
-  <How />
+    <Header />
+    <Loader />
+    <Hero />
+    <Search />
+    <Category />
+    <Resume />
+    <How />
+    <About />
+    <Ready />
+    <Footer />
 </template>

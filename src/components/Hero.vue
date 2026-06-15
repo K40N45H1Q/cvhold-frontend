@@ -15,7 +15,7 @@
         <div class="buttons-group">
           <button class="btn btn-primary" @click="$emit('find-job')">
             <span class="btn-text">Найти работу</span>
-            <i class="fa-solid fa-arrow-right icon-arrow"></i>
+            <font-awesome-icon :icon="faArrowRight" class="icon-arrow" />
           </button>
 
           <button class="btn btn-secondary" @click="$emit('post-vacancy')">
@@ -26,21 +26,21 @@
         <div class="features-list">
           <div class="feature-item">
             <div class="feat-icon">
-              <i class="fa-solid fa-bolt"></i>
+              <font-awesome-icon :icon="faBolt" />
             </div>
             <span>Быстро</span>
           </div>
           
           <div class="feature-item">
             <div class="feat-icon">
-              <i class="fa-solid fa-check"></i>
+              <font-awesome-icon :icon="faCheck" />
             </div>
             <span>Просто</span>
           </div>
 
           <div class="feature-item">
             <div class="feat-icon">
-              <i class="fa-solid fa-user-check"></i>
+              <font-awesome-icon :icon="faUserCheck" />
             </div>
             <span>Без посредников</span>
           </div>
@@ -49,7 +49,7 @@
 
       <div class="visual-wrapper">
         <div class="globe-bg">
-          <img src="/earth.png" alt="Earth Network" class="globe-img" />
+          <img src="/earth.png" alt="Earth Network" class="globe-img" @load="loaded = true" />
         </div>
       </div>
 
@@ -58,13 +58,25 @@
 </template>
 
 <script setup>
-defineEmits(['find-job', 'post-vacancy']);
-</script>
+import { defineEmits, ref } from 'vue'
+import {
+  faArrowRight,
+  faBolt,
+  faCheck,
+  faUserCheck
+} from '@fortawesome/free-solid-svg-icons'
 
-<!-- Подключение Font Awesome -->
-<style>
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
-</style>
+defineEmits(['find-job', 'post-vacancy'])
+
+const loaded = ref(false)
+
+if (loaded.value) {
+  console.log("Okay")
+}
+
+// Никаких повторных объявлений вида "const faCheck = faCheck" — импортированные имена
+// уже доступны в шаблоне как faCheck, faBolt, faUserCheck, faArrowRight.
+</script>
 
 <style scoped>
 /* ============================
@@ -93,7 +105,6 @@ defineEmits(['find-job', 'post-vacancy']);
   display: grid;
   gap: clamp(1.25rem, 2vw, 1.5rem);
   max-width: 640px;
-
 }
 
 .main-title {
@@ -127,6 +138,17 @@ defineEmits(['find-job', 'post-vacancy']);
   white-space: nowrap;
 }
 
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #19785A;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+
 .btn-primary .btn-text {
   font-weight: 600;
   text-transform: uppercase;
@@ -136,8 +158,17 @@ defineEmits(['find-job', 'post-vacancy']);
 }
 
 .icon-arrow {
-  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Цвет и размер SVG внутри font-awesome-icon */
+.icon-arrow svg {
+  width: 1em;
+  height: 1em;
   color: #FFFFFF;
+  fill: currentColor;
 }
 
 .btn-text {
@@ -147,17 +178,12 @@ defineEmits(['find-job', 'post-vacancy']);
   color: #1E2326;
 }
 
-.icon-plus {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  color: #19785A;
-}
-
 /* ============================
-   ФИЧИ (ИСПРАВЛЕНО)
+   ФИЧИ
    ============================ */
 .features-list {
   display: flex;
-  flex-wrap: nowrap; /* всегда одна строка */
+  flex-wrap: nowrap;
   gap: clamp(0.5rem, 1.5vw, 2rem);
   width: 100%;
 }
@@ -179,9 +205,12 @@ defineEmits(['find-job', 'post-vacancy']);
   flex-shrink: 0;
 }
 
-.feat-icon i {
-  font-size: clamp(0.55rem, 1vw, 0.7rem);
+/* Применяем цвет/размер к SVG внутри .feat-icon */
+.feat-icon svg {
+  width: 0.9em;
+  height: 0.9em;
   color: #FFFFFF;
+  fill: currentColor;
 }
 
 .feature-item span {
@@ -226,10 +255,6 @@ defineEmits(['find-job', 'post-vacancy']);
   z-index: 555;
 }
 
-/* ============================
-   остальной код без изменений
-   ============================ */
-
 /* планшеты */
 @media (max-width: 1024px) {
   .container {
@@ -238,13 +263,7 @@ defineEmits(['find-job', 'post-vacancy']);
     text-align: left;
   }
 
-  .buttons-group {
-    white-space: warp;
-  }
-
   .visual-wrapper {
-    order: -1;
-    margin-bottom: 1rem;
     display: none;
   }
 }
@@ -255,5 +274,4 @@ defineEmits(['find-job', 'post-vacancy']);
     grid-template-columns: 1fr;
   }
 }
-
 </style>

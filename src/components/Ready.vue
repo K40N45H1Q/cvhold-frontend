@@ -29,27 +29,26 @@ const handlePostJob = () => {
 </script>
 
 <style scoped>
-/* Основной контейнер */
+/* Основной контейнер на GRID */
 .cta-section {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  padding: 60px 0;
   gap: 40px;
   max-width: 1600px;
   margin: 0 auto;
+  padding: 60px 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 /* Текстовый блок */
 .cta-content {
-  flex: 1;
   max-width: 600px;
 }
 
 .cta-title {
   font-size: 48px;
-  font-weight: 800; /* Жирный шрифт как на макете */
+  font-weight: 800;
   color: #1a1a1a;
   margin: 0 0 20px 0;
   line-height: 1.1;
@@ -63,9 +62,10 @@ const handlePostJob = () => {
   margin: 0;
 }
 
-/* Блок с кнопками */
+/* Блок с кнопками на GRID */
 .cta-actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   gap: 20px;
   flex-shrink: 0;
 }
@@ -75,12 +75,11 @@ const handlePostJob = () => {
   padding: 20px 40px;
   font-size: 16px;
   font-weight: 600;
-  border-radius: 12px; /* Скругленные углы */
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
   white-space: nowrap;
-  min-width: 240px;
 }
 
 /* Primary кнопка (Зеленая) */
@@ -107,5 +106,87 @@ const handlePostJob = () => {
 .btn-secondary:hover {
   background-color: #f0f7f4;
   transform: translateY(-2px);
+}
+
+/* ПЛАНШЕТЫ (до 1024px) — одна колонка для контента, 2 для кнопок */
+@media (max-width: 1024px) {
+  .cta-section {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 48px 0;
+  }
+
+  .cta-content {
+    max-width: 100%;
+  }
+
+  .cta-title {
+    font-size: 40px;
+  }
+
+  .cta-description {
+    font-size: 16px;
+  }
+
+  .cta-actions {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .btn {
+    padding: 18px 24px;
+    font-size: 14px;
+  }
+}
+
+/* МОБИЛЬНЫЕ (до 640px) — 2 колонки для кнопок */
+@media (max-width: 640px) {
+  .cta-section {
+    padding: 15px;
+    gap: 24px;
+  }
+
+  .cta-title {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .cta-description {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .cta-actions {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 13px;
+    text-align: center;
+  }
+}
+
+/* Маленькие мобилки (до 400px) */
+@media (max-width: 400px) {
+  .cta-section {
+    padding: 15px;
+  }
+
+  .cta-title {
+    font-size: 24px;
+  }
+
+  .cta-description {
+    font-size: 13px;
+  }
+
+  .btn {
+    padding: 14px 16px;
+    font-size: 12px;
+  }
 }
 </style>

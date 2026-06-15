@@ -17,13 +17,13 @@
         <span class="copyright">© 2026 CVHOLD</span>
         <a href="/privacy-policy" class="privacy-link">Privacy Policy</a>
       </div>
-
     </div>
   </footer>
 </template>
 
 <script setup>
 import FooterLogo from './FooterLogo.vue';
+
 const navLinks = [
   { text: 'Вакансии', url: '/vacancies' },
   { text: 'Организации', url: '/organizations' },
@@ -37,17 +37,20 @@ const navLinks = [
 .site-footer {
   background-color: #14533f;
   color: #ffffff;
-  padding: 60px 0 40px;
+  /* Плавное масштабирование вертикальных отступов от 32px до 60px */
+  padding: clamp(32px, 5vw, 60px) 0 clamp(24px, 3vw, 40px);
   width: 100%;
 }
 
 .footer-container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 40px;
+  /* Плавное масштабирование боковых отступов от 16px до 40px */
+  padding: 0 clamp(16px, 3vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: 60px; /* Отступ между верхней и нижней частью */
+  /* Плавное масштабирование отступа между верхней и нижней частью */
+  gap: clamp(32px, 5vw, 60px);
 }
 
 /* --- Верхняя секция --- */
@@ -55,24 +58,32 @@ const navLinks = [
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* Разрешаем перенос только в крайнем случае, но сохраняем структуру */
+  flex-wrap: wrap; 
+  gap: clamp(16px, 3vw, 40px);
 }
 
 .footer-logo {
-  /* Ограничиваем ширину лого, чтобы оно не было гигантским */
-  max-width: 200px; 
+  /* Логотип плавно уменьшается от 120px до 200px */
+  max-width: clamp(120px, 15vw, 200px); 
+  width: 100%;
 }
 
 .footer-nav {
   display: flex;
-  gap: 40px;
+  gap: clamp(16px, 3vw, 40px);
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .nav-link {
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  font-size: 16px;
+  /* Шрифт ссылок плавно меняется от 13px до 16px */
+  font-size: clamp(13px, 1.2vw, 16px);
   font-weight: 400;
   transition: color 0.2s ease;
+  white-space: nowrap; /* Запрещаем разрыв слов внутри ссылки */
 }
 
 .nav-link:hover {
@@ -85,17 +96,20 @@ const navLinks = [
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Тонкая линия разделителя (опционально) */
-  padding-top: 30px;
+  flex-wrap: wrap;
+  gap: clamp(12px, 2vw, 20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: clamp(20px, 3vw, 30px);
 }
 
 .copyright {
-  font-size: 14px;
+  /* Шрифт копирайта от 12px до 14px */
+  font-size: clamp(12px, 1vw, 14px);
   color: rgba(255, 255, 255, 0.7);
 }
 
 .privacy-link {
-  font-size: 14px;
+  font-size: clamp(12px, 1vw, 14px);
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -105,5 +119,4 @@ const navLinks = [
   color: #ffffff;
   text-decoration: underline;
 }
-
 </style>
