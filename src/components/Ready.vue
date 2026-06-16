@@ -1,6 +1,5 @@
 <template>
   <div class="cta-section">
-    <!-- Левая часть: Текст -->
     <div class="cta-content">
       <h2 class="cta-title">ГОТОВЫ НАЧАТЬ?</h2>
       <p class="cta-description">
@@ -9,27 +8,18 @@
       </p>
     </div>
 
-    <!-- Правая часть: Кнопки -->
     <div class="cta-actions">
-      <button class="btn btn-primary">НАЙТИ РАБОТУ</button>
+      <RouterLink to="/cvhold-frontend/jobs" class="btn btn-primary">НАЙТИ РАБОТУ</RouterLink>
       <button class="btn btn-secondary">РАЗМЕСТИТЬ ВАКАНСИЮ</button>
     </div>
   </div>
 </template>
 
 <script setup>
-// Логика переходов может быть добавлена здесь
-const handleFindJob = () => {
-  console.log('Navigate to Find Job')
-}
-
-const handlePostJob = () => {
-  console.log('Navigate to Post Job')
-}
+import { RouterLink } from 'vue-router'
 </script>
 
 <style scoped>
-/* Основной контейнер на GRID */
 .cta-section {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -38,10 +28,8 @@ const handlePostJob = () => {
   max-width: 1600px;
   margin: 0 auto;
   padding: 60px 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Текстовый блок */
 .cta-content {
   max-width: 600px;
 }
@@ -62,7 +50,6 @@ const handlePostJob = () => {
   margin: 0;
 }
 
-/* Блок с кнопками на GRID */
 .cta-actions {
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -70,7 +57,6 @@ const handlePostJob = () => {
   flex-shrink: 0;
 }
 
-/* Общие стили кнопок */
 .btn {
   padding: 20px 40px;
   font-size: 16px;
@@ -80,9 +66,12 @@ const handlePostJob = () => {
   transition: all 0.3s ease;
   text-transform: uppercase;
   white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Primary кнопка (Зеленая) */
 .btn-primary {
   background-color: #1e7a5d;
   color: #ffffff;
@@ -96,7 +85,6 @@ const handlePostJob = () => {
   box-shadow: 0 4px 12px rgba(30, 122, 93, 0.3);
 }
 
-/* Secondary кнопка (Контурная) */
 .btn-secondary {
   background-color: transparent;
   color: #1e7a5d;
@@ -108,7 +96,6 @@ const handlePostJob = () => {
   transform: translateY(-2px);
 }
 
-/* ПЛАНШЕТЫ (до 1024px) — одна колонка для контента, 2 для кнопок */
 @media (max-width: 1024px) {
   .cta-section {
     grid-template-columns: 1fr;
@@ -139,7 +126,6 @@ const handlePostJob = () => {
   }
 }
 
-/* МОБИЛЬНЫЕ (до 640px) — 2 колонки для кнопок */
 @media (max-width: 640px) {
   .cta-section {
     padding: 15px;
@@ -170,7 +156,6 @@ const handlePostJob = () => {
   }
 }
 
-/* Маленькие мобилки (до 400px) */
 @media (max-width: 400px) {
   .cta-section {
     padding: 15px;

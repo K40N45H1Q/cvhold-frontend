@@ -1,18 +1,48 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faMagnifyingGlass, faLocationDot, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+
+const route = useRoute()
+const router = useRouter()
 
 const searchQuery = ref('')
 const location = ref('')
 const category = ref('')
+
+onMounted(() => {
+  const { q, loc, cat } = route.query
+  if (q) searchQuery.value = q
+  if (loc) location.value = loc
+  if (cat) category.value = cat
+})
+
+watch(() => route.query, (newQuery) => {
+  searchQuery.value = newQuery.q || ''
+  location.value = newQuery.loc || ''
+  category.value = newQuery.cat || ''
+})
+
+const handleSearch = () => {
+  const query = {}
+  
+  const q = searchQuery.value.trim()
+  const loc = location.value.trim()
+  const cat = category.value
+  
+  if (q) query.q = q
+  if (loc) query.loc = loc
+  if (cat) query.cat = cat
+  
+  router.push({ path: '/cvhold-frontend/jobs', query })
+}
 </script>
 
 <template>
   <section class="search">
     <div class="search-box">
       <div class="search-grid">
-        <!-- Я ищу -->
         <div class="field">
           <label class="field-label">Я ищу</label>
           <div class="field-input-row">
@@ -21,6 +51,7 @@ const category = ref('')
               type="text" 
               class="field-input"
               placeholder="Должность, компания"
+              @keyup.enter="handleSearch"
             />
             <font-awesome-icon 
               :icon="faMagnifyingGlass" 
@@ -29,7 +60,6 @@ const category = ref('')
           </div>
         </div>
 
-        <!-- Где -->
         <div class="field">
           <label class="field-label">Где</label>
           <div class="field-input-row">
@@ -38,6 +68,7 @@ const category = ref('')
               type="text" 
               class="field-input"
               placeholder="Страна, город или регион"
+              @keyup.enter="handleSearch"
             />
             <font-awesome-icon 
               :icon="faLocationDot" 
@@ -46,18 +77,18 @@ const category = ref('')
           </div>
         </div>
 
-        <!-- Категория -->
         <div class="field">
           <label class="field-label">Категория</label>
           <div class="field-input-row">
             <select v-model="category" class="field-select">
               <option value="" disabled selected>Выберите категорию</option>
-              <option value="1">Строительство</option>
-              <option value="2">Производство</option>
-              <option value="3">Логистика</option>
-              <option value="4">IT и технологии</option>
-              <option value="5">Медицина</option>
-              <option value="6">Гостиничный бизнес</option>
+              <option value="">Все категории</option>
+              <option value="Construction">Строительство</option>
+              <option value="Manufacturing">Производство</option>
+              <option value="Logistics">Логистика</option>
+              <option value="Engineering">IT и технологии</option>
+              <option value="Quality">Медицина</option>
+              <option value="Management">Гостиничный бизнес</option>
             </select>
             <font-awesome-icon 
               :icon="faChevronDown" 
@@ -66,8 +97,7 @@ const category = ref('')
           </div>
         </div>
 
-        <!-- Кнопка -->
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" @click="handleSearch">
           НАЙТИ ВАКАНСИИ
         </button>
       </div>
@@ -76,9 +106,6 @@ const category = ref('')
 </template>
 
 <style scoped>
-/* ============================
-   БАЗА (МОБИЛЬНЫЕ ПО УМОЛЧАНИЮ)
-   ============================ */
 .search {
   width: 100%;
   display: flex;
@@ -91,13 +118,12 @@ const category = ref('')
   width: 100%;
   max-width: 1600px;
   background: #FFFFFF;
-  box-shadow: var(--b_shadow);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   padding: 15px;
   border-radius: 0.75rem;
   box-sizing: border-box;
 }
 
-/* Всегда 1 колонка по умолчанию */
 .search-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -109,7 +135,6 @@ const category = ref('')
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.75rem 0.5rem;
-  /* Разделитель между полями по вертикали */
   border-bottom: 1px solid rgba(30, 35, 38, 0.12);
 }
 
@@ -142,7 +167,7 @@ const category = ref('')
   outline: none;
   background: transparent;
   padding: 0;
-  padding-right: 2rem; /* Место под иконку */
+  padding-right: 2rem;
   appearance: none;
   cursor: pointer;
   font-family: inherit;
@@ -180,13 +205,11 @@ const category = ref('')
   right: 0.25rem;
 }
 
-/* Кнопка на мобильных */
-.search-btn {
+.btn-primary {
   width: 100%;
   height: 3rem;
   margin-top: 1rem;
   background: #19785A;
-  box-shadow: 0px 4px 10px rgba(25, 120, 90, 0.2);
   border-radius: 0.5rem;
   border: none;
   font-weight: 600;
@@ -201,21 +224,14 @@ const category = ref('')
   letter-spacing: 0.02em;
 }
 
-.search-btn:hover {
+.btn-primary:hover {
   background: #146149;
   transform: translateY(-1px);
 }
 
-.search-btn:active {
-  transform: translateY(0);
-}
-
-/* ============================
-   ПОЛНЫЙ ЭКРАН (ДЕСКТОП)
-   ============================ */
 @media (min-width: 1024px) {
   .search {
-    padding: var(--indent);
+    padding: 1.25rem;
   }
 
   .search-box {
@@ -223,7 +239,6 @@ const category = ref('')
     border-radius: 0.625rem;
   }
 
-  /* 3 колонки полей + 1 колонка кнопки */
   .search-grid {
     grid-template-columns: 1fr 1fr 1fr 273px;
     gap: 0;
@@ -270,24 +285,20 @@ const category = ref('')
     right: 0.25rem;
   }
 
-  .search-btn {
+  .btn-primary {
     width: auto;
     height: 4.375rem;
     margin-top: 0;
     font-size: 1.125rem;
     border-radius: 0.625rem;
     padding: 0 1.5rem;
-    box-shadow: 0px 4px 10px #FFFFFF, 0px 0px 4px #19785A;
   }
 
-  .search-btn:hover {
+  .btn-primary:hover {
     transform: translateY(-2px);
   }
 }
 
-/* ============================
-   iPhone SE / очень маленькие экраны
-   ============================ */
 @media (max-width: 360px) {
   .search {
     padding: 0.75rem 0.5rem;
@@ -306,7 +317,7 @@ const category = ref('')
     font-size: 0.85rem;
   }
 
-  .search-btn {
+  .btn-primary {
     height: 2.875rem;
     font-size: 0.8rem;
   }

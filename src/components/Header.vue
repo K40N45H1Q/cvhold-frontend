@@ -1,97 +1,38 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { RouterLink } from 'vue-router'
 import Logo from './Logo.vue'
 
 const menuItems = [
-  { id: 'home', label: 'Главная', href: '#home' },
-  { id: 'about', label: 'О нас', href: '#about' },
-  { id: 'services', label: 'Услуги', href: '#services' },
-  { id: 'contacts', label: 'Контакты', href: '#contacts' }
+  { id: 'home', label: 'Главная', to: '/' },
+  { id: 'about', label: 'О нас', to: '/about' },
+  { id: 'services', label: 'Услуги', to: '/services' },
+  { id: 'contacts', label: 'Контакты', to: '/contacts' }
 ]
-
-const active = ref('home')
-const menuOpen = ref(false)
-
-function setActive(name) {
-  active.value = name
-  menuOpen.value = false
-}
-
-function toggleMenu() {
-  menuOpen.value = !menuOpen.value
-}
-
-function closeMenu() {
-  menuOpen.value = false
-}
-
-function handleResize() {
-  if (window.innerWidth > 1100 && menuOpen.value) {
-    menuOpen.value = false
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
-})
-
-watch(menuOpen, value => {
-  document.body.style.overflow = value ? 'hidden' : ''
-})
 </script>
 
 <template>
   <header class="header">
     <div class="container">
-      <Logo class="logo" />
+      <RouterLink to="/cvhold-frontend/" class="logo-link">
+        <Logo class="logo" />
+      </RouterLink>
 
       <nav class="desktop-nav" aria-label="Главное меню">
-        <a
+        <RouterLink
           v-for="item in menuItems"
           :key="item.id"
-          :href="item.href"
-          :class="{ active: active === item.id }"
-          @click.prevent="setActive(item.id)"
+          :to="item.to"
+          class="nav-link"
         >
           {{ item.label }}
-        </a>
+        </RouterLink>
       </nav>
 
       <div class="desktop-actions">
         <button class="btn btn-secondary">Войти</button>
         <button class="btn btn-primary">Регистрация</button>
       </div>
-
-      <button class="burger" :aria-expanded="menuOpen" @click="toggleMenu">
-        <font-awesome-icon :icon="menuOpen ? faXmark : faBars" />
-      </button>
     </div>
-
-    <transition name="slide-down">
-      <aside v-if="menuOpen" class="mobile-menu">
-        <div class="mobile-content">
-          <nav class="mobile-links" aria-label="Навигация">
-            <a
-              v-for="item in menuItems"
-              :key="item.id"
-              :href="item.href"
-              :class="{ active: active === item.id }"
-              @click.prevent="setActive(item.id)"
-            >
-              {{ item.label }}
-            </a>
-            <a href="#signin">Войти</a>
-            <a href="#signup">Регистрация</a>
-          </nav>
-        </div>
-      </aside>
-    </transition>
   </header>
 </template>
 
@@ -120,6 +61,11 @@ watch(menuOpen, value => {
   background: #fff;
 }
 
+.logo-link {
+  text-decoration: none;
+  display: block;
+}
+
 .logo {
   width: clamp(120px, 20vw, 200px);
   flex-shrink: 0;
@@ -132,7 +78,7 @@ watch(menuOpen, value => {
   justify-content: center;
 }
 
-.desktop-nav a {
+.nav-link {
   color: #1E2326;
   font-weight: 600;
   text-decoration: none;
@@ -141,7 +87,7 @@ watch(menuOpen, value => {
   transition: color 0.18s ease;
 }
 
-.desktop-nav a::after {
+.nav-link::after {
   content: "";
   position: absolute;
   left: 0;
@@ -154,13 +100,13 @@ watch(menuOpen, value => {
   transition: transform 0.28s;
 }
 
-.desktop-nav a:hover,
-.desktop-nav a.active {
+.nav-link:hover,
+.nav-link.router-link-active {
   color: #19785A;
 }
 
-.desktop-nav a:hover::after,
-.desktop-nav a.active::after {
+.nav-link:hover::after,
+.nav-link.router-link-active::after {
   transform: scaleX(1);
 }
 
@@ -197,128 +143,12 @@ watch(menuOpen, value => {
   transform: translateY(-2px);
 }
 
-.burger {
-  display: none;
-  width: 48px !important;
-  height: 48px !important;
-  border: none;
-  background: transparent;
-  font-size: 24px;
-  color: #1E2326;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  z-index: 20;
-  padding: 0;
-}
-
-.mobile-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  background: #fff;
-  z-index: 1;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  max-height: calc(100vh - 140px);
-}
-
-.mobile-content {
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-}
-
-.mobile-links {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.mobile-links a {
-  position: relative;
-  display: block;
-  padding: 14px 16px;
-  font-weight: 700;
-  color: #1E2326;
-  text-decoration: none;
-  border-radius: 10px;
-  transition: background 0.16s ease, transform 0.12s ease, color 0.16s ease;
-}
-
-.mobile-links a::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 8px;
-  bottom: 8px;
-  width: 6px;
-  border-radius: 6px;
-  background: linear-gradient(180deg, #19785A, #0f6b4f);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.26s cubic-bezier(0.2, 0.9, 0.2, 1);
-  opacity: 0;
-}
-
-.mobile-links a:hover,
-.mobile-links a:focus,
-.mobile-links a:focus-visible {
-  background: rgba(25, 120, 90, 0.04);
-  color: #0f6b4f;
-  transform: translateX(-2px);
-}
-
-.mobile-links a:hover::before,
-.mobile-links a:focus::before,
-.mobile-links a:focus-visible::before {
-  transform: scaleY(1);
-  opacity: 1;
-}
-
-.slide-down-enter-active,
-.slide-down-leave-active {
-  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.25s ease;
-}
-
-.slide-down-enter-from {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-.slide-down-enter-to {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.slide-down-leave-from {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.slide-down-leave-to {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-a:focus-visible,
-button:focus-visible {
-  outline: 3px solid rgba(25, 120, 90, 0.12);
-  outline-offset: 4px;
-  border-radius: 8px;
-}
-
-/* ПЛАНШЕТЫ (до 1200px) — уменьшаем отступы */
 @media (max-width: 1200px) {
   .desktop-nav {
     gap: 30px;
   }
   
-  .desktop-nav a {
+  .nav-link {
     font-size: 15px;
   }
   
@@ -328,15 +158,10 @@ button:focus-visible {
   }
 }
 
-/* ПЛАНШЕТЫ (до 1100px) — показываем бургер */
 @media (max-width: 1100px) {
   .desktop-nav,
   .desktop-actions {
     display: none;
-  }
-  
-  .burger {
-    display: flex;
   }
   
   .container {
@@ -347,13 +172,8 @@ button:focus-visible {
   .logo {
     width: clamp(120px, 30vw, 180px);
   }
-  
-  .mobile-menu {
-    max-height: calc(100vh - 80px);
-  }
 }
 
-/* МОБИЛЬНЫЕ (до 768px) */
 @media (max-width: 768px) {
   .container {
     min-height: 70px;
@@ -363,24 +183,8 @@ button:focus-visible {
   .logo {
     width: clamp(100px, 28vw, 140px);
   }
-  
-  .burger {
-    width: 44px !important;
-    height: 44px !important;
-    font-size: 22px;
-  }
-  
-  .mobile-menu {
-    max-height: calc(100vh - 70px);
-  }
-  
-  .mobile-links a {
-    padding: 12px 14px;
-    font-size: 15px;
-  }
 }
 
-/* МАЛЕНЬКИЕ МОБИЛЬНЫЕ (до 480px) */
 @media (max-width: 480px) {
   .container {
     min-height: 64px;
@@ -389,21 +193,6 @@ button:focus-visible {
   
   .logo {
     width: clamp(90px, 26vw, 120px);
-  }
-  
-  .burger {
-    width: 40px !important;
-    height: 40px !important;
-    font-size: 20px;
-  }
-  
-  .mobile-menu {
-    max-height: calc(100vh - 64px);
-  }
-  
-  .mobile-links a {
-    padding: 10px 12px;
-    font-size: 14px;
   }
 }
 </style>

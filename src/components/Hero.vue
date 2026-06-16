@@ -13,10 +13,10 @@
         </p>
 
         <div class="buttons-group">
-          <button class="btn btn-primary" @click="$emit('find-job')">
+          <RouterLink to="/cvhold-frontend/jobs" class="btn btn-primary">
             <span class="btn-text">Найти работу</span>
             <font-awesome-icon :icon="faArrowRight" class="icon-arrow" />
-          </button>
+          </RouterLink>
 
           <button class="btn btn-secondary" @click="$emit('post-vacancy')">
             <span class="btn-text">Разместить вакансию</span>
@@ -49,7 +49,7 @@
 
       <div class="visual-wrapper">
         <div class="globe-bg">
-          <img src="/earth.png" alt="Earth Network" class="globe-img" @load="loaded = true" />
+          <img src="/earth.png" alt="Earth Network" class="globe-img" />
         </div>
       </div>
 
@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { defineEmits, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import {
   faArrowRight,
   faBolt,
@@ -66,22 +66,10 @@ import {
   faUserCheck
 } from '@fortawesome/free-solid-svg-icons'
 
-defineEmits(['find-job', 'post-vacancy'])
-
-const loaded = ref(false)
-
-if (loaded.value) {
-  console.log("Okay")
-}
-
-// Никаких повторных объявлений вида "const faCheck = faCheck" — импортированные имена
-// уже доступны в шаблоне как faCheck, faBolt, faUserCheck, faArrowRight.
+defineEmits(['post-vacancy'])
 </script>
 
 <style scoped>
-/* ============================
-   БАЗА
-   ============================ */
 .hero-section {
   width: 100%;
   overflow: hidden;
@@ -98,9 +86,6 @@ if (loaded.value) {
   max-height: max-content;
 }
 
-/* ============================
-   ЛЕВАЯ ЧАСТЬ
-   ============================ */
 .content-wrapper {
   display: grid;
   gap: clamp(1.25rem, 2vw, 1.5rem);
@@ -127,9 +112,6 @@ if (loaded.value) {
   font-size: clamp(0.95rem, 1.5vw, 1.25rem);
 }
 
-/* ============================
-   КНОПКИ
-   ============================ */
 .buttons-group {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -147,6 +129,13 @@ if (loaded.value) {
   border: none;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #146a4f;
+  transform: translateY(-2px);
 }
 
 .btn-primary .btn-text {
@@ -163,7 +152,6 @@ if (loaded.value) {
   justify-content: center;
 }
 
-/* Цвет и размер SVG внутри font-awesome-icon */
 .icon-arrow svg {
   width: 1em;
   height: 1em;
@@ -178,9 +166,6 @@ if (loaded.value) {
   color: #1E2326;
 }
 
-/* ============================
-   ФИЧИ
-   ============================ */
 .features-list {
   display: flex;
   flex-wrap: nowrap;
@@ -205,7 +190,6 @@ if (loaded.value) {
   flex-shrink: 0;
 }
 
-/* Применяем цвет/размер к SVG внутри .feat-icon */
 .feat-icon svg {
   width: 0.9em;
   height: 0.9em;
@@ -220,9 +204,6 @@ if (loaded.value) {
   white-space: nowrap;
 }
 
-/* ============================
-   ПРАВАЯ ЧАСТЬ
-   ============================ */
 .visual-wrapper {
   position: relative;
   width: 100%;
@@ -255,7 +236,6 @@ if (loaded.value) {
   z-index: 555;
 }
 
-/* планшеты */
 @media (max-width: 1024px) {
   .container {
     grid-template-columns: 1fr;
@@ -268,7 +248,6 @@ if (loaded.value) {
   }
 }
 
-/* мобильные */
 @media (max-width: 768px) {
   .buttons-group {
     grid-template-columns: 1fr;
