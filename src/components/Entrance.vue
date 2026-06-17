@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <form class="card" @submit.prevent="submit">
-      <h1 class="title">Continue to your account</h1>
+      <h1 class="title">Вход в аккаунт</h1>
 
       <input
         v-model="email"
@@ -14,7 +14,7 @@
         <input
           v-model="password"
           :type="showPassword ? 'text' : 'password'"
-          placeholder="Password"
+          placeholder="Пароль"
           class="input"
         />
 
@@ -28,11 +28,11 @@
       </div>
 
       <button type="submit" class="btn btn-primary">
-        Sign in
+        Войти
       </button>
 
-      <RouterLink to="/signup" class="link">
-        Create an account
+      <RouterLink to="/cvhold-frontend/signup" class="link">
+        Нет аккаунта? <span class="link-accent">Зарегистрироваться</span>
       </RouterLink>
     </form>
   </div>
@@ -40,6 +40,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const email = ref('')
 const password = ref('')
@@ -52,35 +53,33 @@ const submit = () => {
 
 <style scoped>
 .page {
-  min-height: calc(100% - 80px);
-  display: grid;
-  place-items: center;
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card {
   width: 100%;
-  max-width: 380px;
-  padding: 28px;
+  max-width: 400px;
+  padding: 32px;
   border-radius: 16px;
-
-  background: var(--background-transparent);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-
-  display: grid;
-  gap: 20px;
-  border: solid 2px rgba(0, 230, 119, 0.9);
-  box-shadow: 0px 0px 15px 5px rgba(0, 230, 119, 0.15);
-
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .title {
-  margin: 0 0 6px;
-  font-size: clamp(15px, 2vw, 22px);
-  font-weight: 600;
-  color: #e5e7eb;
+  margin: 0 0 8px;
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 700;
+  color: #1e2326;
   letter-spacing: -0.02em;
   text-align: center;
 }
@@ -88,21 +87,24 @@ const submit = () => {
 .input {
   width: 100%;
   padding: 12px 14px;
-
   border-radius: 10px;
-  border: 1px solid rgba(0, 230, 119, 0.3);
-  background: var(--background-transparent);
-
-  color: #e5e7eb;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  color: #1e2326;
+  font-size: 14px;
   outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+}
 
-  transition: 0.2s ease;
+.input::placeholder {
+  color: rgba(30, 35, 38, 0.4);
 }
 
 .input:focus {
-  border-color: var(--color-accent);
-  background: rgba(0, 230, 119, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 230, 119, 0.25);
+  border-color: #19785A;
+  box-shadow: 0 0 0 3px rgba(25, 120, 90, 0.1);
 }
 
 .password {
@@ -119,42 +121,69 @@ const submit = () => {
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-
   border: none;
   background: transparent;
-
   cursor: pointer;
   padding: 6px;
-
-  color: rgba(229, 231, 235, 0.6);
-
+  color: rgba(30, 35, 38, 0.5);
   display: grid;
   place-items: center;
-
-  transition: 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .toggle:hover {
-  color: #e5e7eb;
+  color: #19785A;
 }
 
 .toggle i {
   font-size: 14px;
 }
 
+.btn {
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #19785A;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.btn:hover {
+  background: #146a4f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(25, 120, 90, 0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
 .link {
   text-align: center;
   font-size: 13px;
-  color: rgba(229, 231, 235, 0.7);
+  color: rgba(30, 35, 38, 0.6);
   text-decoration: none;
   margin-top: 4px;
+  transition: color 0.2s ease;
 }
 
 .link:hover {
-  color: #e5e7eb;
+  color: #1e2326;
 }
 
-.btn {
-    padding: 12px 14px;
+.link-accent {
+  color: #19785A;
+  font-weight: 600;
+}
+
+.link:hover .link-accent {
+  text-decoration: underline;
 }
 </style>

@@ -6,10 +6,10 @@ import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 import Logo from './Logo.vue'
 
 const menuItems = [
-  { id: 'home', label: 'Главная', to: '/' },
-  { id: 'about', label: 'О нас', to: '/about' },
-  { id: 'services', label: 'Услуги', to: '/services' },
-  { id: 'contacts', label: 'Контакты', to: '/contacts' }
+  { id: 'home', label: 'Главная', to: '/cvhold-frontend/' },
+  { id: 'about', label: 'О нас', to: '/cvhold-frontend/' },
+  { id: 'services', label: 'Услуги', to: '/cvhold-frontend/' },
+  { id: 'contacts', label: 'Контакты', to: '/cvhold-frontend/' }
 ]
 
 const menuOpen = ref(false)
@@ -61,8 +61,8 @@ watch(menuOpen, value => {
       </nav>
 
       <div class="desktop-actions">
-        <button class="btn btn-secondary">Войти</button>
-        <button class="btn btn-primary">Регистрация</button>
+        <RouterLink to="/cvhold-frontend/signin" class="btn btn-secondary">Войти</RouterLink>
+        <RouterLink to="/cvhold-frontend/signup" class="btn btn-primary">Регистрация</RouterLink>
       </div>
 
       <button class="burger" :aria-expanded="menuOpen" @click="toggleMenu">
@@ -83,8 +83,8 @@ watch(menuOpen, value => {
             >
               {{ item.label }}
             </RouterLink>
-            <a href="#signin" class="mobile-link">Войти</a>
-            <a href="#signup" class="mobile-link">Регистрация</a>
+            <RouterLink to="/cvhold-frontend/signin" class="mobile-link" @click="closeMenu">Войти</RouterLink>
+            <RouterLink to="/cvhold-frontend/signup" class="mobile-link" @click="closeMenu">Регистрация</RouterLink>
           </nav>
         </div>
       </aside>
@@ -156,13 +156,11 @@ watch(menuOpen, value => {
   transition: transform 0.28s;
 }
 
-.nav-link:hover,
-.nav-link.router-link-active {
+.nav-link:hover {
   color: #19785A;
 }
 
-.nav-link:hover::after,
-.nav-link.router-link-active::after {
+.nav-link:hover::after {
   transform: scaleX(1);
 }
 
@@ -181,6 +179,10 @@ watch(menuOpen, value => {
   color: #19785A;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary {
@@ -269,8 +271,7 @@ watch(menuOpen, value => {
 
 .mobile-link:hover,
 .mobile-link:focus,
-.mobile-link:focus-visible,
-.mobile-link.router-link-active {
+.mobile-link:focus-visible {
   background: rgba(25, 120, 90, 0.04);
   color: #0f6b4f;
   transform: translateX(-2px);
@@ -278,8 +279,7 @@ watch(menuOpen, value => {
 
 .mobile-link:hover::before,
 .mobile-link:focus::before,
-.mobile-link:focus-visible::before,
-.mobile-link.router-link-active::before {
+.mobile-link:focus-visible::before {
   transform: scaleY(1);
   opacity: 1;
 }
@@ -406,5 +406,4 @@ button:focus-visible {
     font-size: 14px;
   }
 }
-
 </style>
