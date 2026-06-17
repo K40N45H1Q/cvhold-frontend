@@ -381,6 +381,7 @@ button:focus-visible {
   }
 }
 
+
 @media (max-width: 480px) {
   .container {
     min-height: 64px;
